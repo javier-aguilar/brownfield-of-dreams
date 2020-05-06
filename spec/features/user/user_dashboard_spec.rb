@@ -35,13 +35,13 @@ describe 'User' do
     expect(page).to have_link("brownfield-of-dreams")
     expect(page).to have_css('a[href="https://github.com/javier-aguilar/brownfield-of-dreams"]')
 
-    expect(page).to have_link("alpha_paradigms_academy")
-    expect(page).to have_css('a[href="https://github.com/quiet-storm/alpha_paradigms_academy"]')
+    expect(page).to have_link("adopt_dont_shop_2001")
+    expect(page).to have_css('a[href="https://github.com/tony-gomes/adopt_dont_shop_2001"]')
 
-    expect(page).to have_link("metaphysics")
-    expect(page).to have_css('a[href="https://github.com/quiet-storm/metaphysics"]')
+    expect(page).to have_link("adopt_dont_shop_2001_three_amigos")
+    expect(page).to have_css('a[href="https://github.com/tony-gomes/adopt_dont_shop_2001_three_amigos"]')
 
-    expect(page).to have_link("metaphysics-dev")
-    expect(page).to have_css('a[href="https://github.com/quiet-storm/metaphysics-dev"]')
+    expect(page).to have_link("b2-mid-mod")
+    expect(page).to have_css('a[href="https://github.com/tony-gomes/b2-mid-mod"]')
   end
 end
