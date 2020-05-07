@@ -33,4 +33,28 @@ describe 'vister can create an account', :js do
     expect(page).to have_content(last_name)
     expect(page).to_not have_content('Sign In')
   end
+  it ' visits the home page and registers without all necessary info' do
+    first_name = 'Jim'
+    last_name = 'Bob'
+    password = 'password'
+
+    visit '/'
+
+    click_on 'Sign In'
+
+    expect(current_path).to eq(login_path)
+
+    click_on 'Sign up now.'
+
+    expect(current_path).to eq(new_user_path)
+
+    fill_in 'user[first_name]', with: first_name
+    fill_in 'user[last_name]', with: last_name
+    fill_in 'user[password]', with: password
+    fill_in 'user[password_confirmation]', with: password
+
+    click_on'Create Account'
+
+    expect(page).to have_content("Email can't be blank")
+  end
 end
