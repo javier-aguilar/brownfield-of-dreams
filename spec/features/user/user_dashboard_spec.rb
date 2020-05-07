@@ -4,6 +4,13 @@ feature "A user visiting the user dashboard" do
   scenario "can see 5 repos" do
     user = create(:user)
 
+    visit '/'
+    click_on "Sign In"
+    fill_in 'session[email]', with: user.email
+    fill_in 'session[password]', with: user.password
+    click_on 'Log In'
+
+    user.update(token: ENV['GITHUB_TOKEN_1'])
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit "/user/dashboard"
