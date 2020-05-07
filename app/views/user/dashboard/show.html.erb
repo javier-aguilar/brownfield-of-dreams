@@ -11,10 +11,12 @@
     <h1>Bookmarked Segments</h1>
   </section>
 
-<section class="user-repo-list" >
-  <ul>
-    <% @facade.limited_number_repos.each do |repo| %>
-      <li class="user-repo-link"><%= link_to repo[:name], repo[:html_url] %></li>
-    <% end %>
-  </ul>
-</section>
+<% if current_user.token %>
+  <section class="user-repo-list" >
+    <ul>
+      <% @facade.git_service.limited_number_repos(current_user[:token]).each do |repo| %>
+        <li class="user-repo-link"><%= link_to repo[:name], repo[:html_url] %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
