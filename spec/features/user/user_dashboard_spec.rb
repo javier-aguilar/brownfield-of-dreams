@@ -1,33 +1,15 @@
 require 'rails_helper'
 
-describe 'User' do
-  before :each do
-    @user = create(:user)
-    @user2 = create(:user)
-    visit '/'
-    click_on "Sign In"
-    fill_in 'session[email]', with: @user.email
-    fill_in 'session[password]', with: @user.password
-    click_on 'Log In'
-  end
+feature "A user visiting the user dashboard" do
+  scenario "can see 5 repos" do
+    user = create(:user)
 
-  it "once logged in, cannot see repositories if missing token" do
-    visit '/dashboard'
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-    expect(page).to have_no_content("Github")
+    visit "/user/dashboard"
 
-    expect(page).to_not have_link("futbol")
-    expect(page).to_not have_link("brownfield-of-dreams")
-    expect(page).to_not have_link("alpha_paradigms_academy")
-    expect(page).to_not have_link("metaphysics")
-    expect(page).to_not have_link("metaphysics-dev")
-  end
-
-  it "once logged in, can see their repositories if they have a token" do
-    @user.update(token: ENV['GITHUB_TOKEN_1'])
-    # @user2.update(token: ENV['GITHUB_TOKEN_2'])
-
-    visit '/dashboard'
+    expect(page).to have_css(".user-repo-list")
+    expect(page).to have_css(".user-repo-link", count: 5)
 
     expect(page).to have_link("futbol")
     expect(page).to have_css('a[href="https://github.com/iEv0lv3/futbol"]')
