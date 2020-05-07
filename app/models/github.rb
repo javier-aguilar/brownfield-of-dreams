@@ -1,23 +1,16 @@
-class Github
-  class Repo
-    attr_reader :name, :url
-
-    def initialize(name, url)
-      @name = name
-      @url = url
-    end
-  end
-
-  def self.list_repos(token)
-    @token = token
-    response = connect.get('/user/repos')
-    data = JSON.parse(response.body, symbolize_names: true).take(5)
+module Github
+  def self.repos(token)
+    data = GithubService.new(token).list_repos.take(5)
     data.map { |repo| Repo.new(repo[:name], repo[:html_url]) }
   end
 
-  def self.connect
-    Faraday.new('https://api.github.com') do |conn|
-      conn.authorization :Bearer, @token
-    end
+  def self.followers(token)
+    data = GithubService.new(token).list_followers
+    data.map { |user| Follower.new(user[:login], user[:html_url]) }
+  end
+
+  def self.following(token)
+    data = GithubService.new(token).list_following
+    data.map { |user| Follower.new(user[:login], user[:html_url]) }
   end
 end
