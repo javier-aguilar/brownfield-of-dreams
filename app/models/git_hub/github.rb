@@ -8,7 +8,7 @@ module Github
     end
 
     def self.list_repos(token)
-      new(GithubService.new.list_repos(token))
+      new(GithubService.new.limited_number_repos(token))
     end
   end
 end
