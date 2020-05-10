@@ -21,12 +21,6 @@ describe 'User' do
     expect(page).to_not have_link("metaphysics")
     expect(page).to_not have_link("metaphysics-dev")
   end
-  it 'once logged in can see connect to github button' do
-    visit '/dashboard'
-
-    expect(page).to have_selector(:link_or_button, 'Connect to Github')
-    expect(page).to have_selector(:css, 'a[href=https://github.com/login/oauth/authorize?client_id=current_user]')
-  end
   it "once logged in, can see their repositories if they have a token" do
     @user.update(token: ENV['GITHUB_TOKEN_1'])
     @user2.update(token: ENV['GITHUB_TOKEN_2'])
