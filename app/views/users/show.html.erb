@@ -3,7 +3,7 @@
 
   <% unless current_user.token %>
   <%= button_to "Connnect to Github",
-  "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}" %>
+  "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}&scope=repo" %>
   <% end %>
 
   <%= button_to 'Log Out', logout_path, method: 'delete', class: "btn btn-primary mb1 bg-teal" %>
