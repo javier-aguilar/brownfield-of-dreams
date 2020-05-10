@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     get "/dashboard", to: "dashboard#show"
   end
 
-  get '/auth/github/callback', to: 'githubs#create'
+  get '/auth/github/callback', to: 'sessions#create'
 
   resources :users, only: [:new, :create, :update, :edit]
 
