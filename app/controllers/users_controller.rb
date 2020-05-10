@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    binding.pry
     client_id     = ENV['GITHUB_CLIENT_ID']
     client_secret = ENV['GITHUB_CLIENT_SECRET']
     code          = params[:code]
