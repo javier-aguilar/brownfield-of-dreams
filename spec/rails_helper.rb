@@ -41,7 +41,7 @@ RSpec.configure do |config|
 end
 
 VCR.configure do |config|
-  config.ignore_hosts '127.0.0.1', 'localhost'
+  config.ignore_hosts '127.0.0.1', 'localhost', 'chromedriver.storage.googleapis.com'
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.hook_into :webmock
   config.filter_sensitive_data('<GITHUB_TOKEN_1>') { ENV['GITHUB_TOKEN_1'] }
