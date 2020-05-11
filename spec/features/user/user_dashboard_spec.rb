@@ -13,7 +13,7 @@ describe 'User', :vcr do
   it "once logged in, cannot see repositories if missing token" do
     visit '/dashboard'
 
-    expect(page).to have_no_content("Github")
+    expect(page).to_not have_css('h1', :text => 'Github')
 
     expect(page).to_not have_link("futbol")
     expect(page).to_not have_link("brownfield-of-dreams")

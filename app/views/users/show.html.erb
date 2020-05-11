@@ -1,5 +1,10 @@
 <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
+
+  <% unless current_user.token %>
+    <%= link_to "Connnect to Github", "/auth/github" %>
+  <% end %>
+
   <%= button_to 'Log Out', logout_path, method: 'delete', class: "btn btn-primary mb1 bg-teal" %>
   <h3>Account Details</h3>
   <ul>
@@ -11,7 +16,7 @@
   </section>
   <% if current_user.token %>
     <section>
-        <h1>Github</h1>
+        <h1 class="github-header">Github</h1>
         <ul>
           <% @user.repos.each do |repo| %>
             <li><%= link_to repo.name, repo.url %></li>
