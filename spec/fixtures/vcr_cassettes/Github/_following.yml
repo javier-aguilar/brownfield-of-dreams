@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/user/following
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <GITHUB_TOKEN_1>
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Mon, 11 May 2020 02:14:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4988'
+      X-Ratelimit-Reset:
+      - '1589166797'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      Etag:
+      - W/"ffbb8091823b33578aa152bb59bc7edc"
+      X-Oauth-Scopes:
+      - public_repo, repo:status, repo_deployment
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - C65C:1217:B6984C:1A98C6C:5EB8B4E8
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"login":"disconnectme","id":698691,"node_id":"MDQ6VXNlcjY5ODY5MQ==","avatar_url":"https://avatars0.githubusercontent.com/u/698691?v=4","gravatar_id":"","url":"https://api.github.com/users/disconnectme","html_url":"https://github.com/disconnectme","followers_url":"https://api.github.com/users/disconnectme/followers","following_url":"https://api.github.com/users/disconnectme/following{/other_user}","gists_url":"https://api.github.com/users/disconnectme/gists{/gist_id}","starred_url":"https://api.github.com/users/disconnectme/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/disconnectme/subscriptions","organizations_url":"https://api.github.com/users/disconnectme/orgs","repos_url":"https://api.github.com/users/disconnectme/repos","events_url":"https://api.github.com/users/disconnectme/events{/privacy}","received_events_url":"https://api.github.com/users/disconnectme/received_events","type":"User","site_admin":false}]'
+    http_version: null
+  recorded_at: Mon, 11 May 2020 02:14:00 GMT
+recorded_with: VCR 5.1.0

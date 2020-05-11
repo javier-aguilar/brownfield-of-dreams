@@ -2,21 +2,21 @@
 require "rails_helper"
 
 describe Github do
-  it "#repos" do
+  it "#repos", :vcr do
     repos = Github.repos(ENV['GITHUB_TOKEN_1'])
     repo_data = repos.first
 
     expect(repo_data).to have_attributes(name: 'futbol')
     expect(repo_data).to have_attributes(url: 'https://github.com/iEv0lv3/futbol')
   end
-  it "#followers" do
+  it "#followers", :vcr do
     followers = Github.followers(ENV['GITHUB_TOKEN_1'])
     follower_data = followers.first
 
     expect(follower_data).to have_attributes(name: 'strafe')
     expect(follower_data).to have_attributes(url: 'https://github.com/strafe')
   end
-  it "#following" do
+  it "#following", :vcr do
     following = Github.following(ENV['GITHUB_TOKEN_1'])
     following_data = following.first
 

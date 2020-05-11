@@ -33,4 +33,21 @@ describe 'As an admin'
         expect(page.all('li').last).to have_content("Every Cancelled N64 Game - Did You Know Gaming? Ft. Remix (South Park 2, Doom Absolution + more.)")
       end
     end
+    it 'I receive an error when trying to import a YouTube playlist with invalid
+        token', :vcr do
+        admin = create(:user, role: 1)
+        playlist_id = 'abcd'
+
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+
+        visit new_admin_tutorial_path
+
+        click_on 'Import Youtube Playlist'
+
+        fill_in'tutorial[playlist_id]', with: playlist_id
+        click_on 'Import'
+
+        expect(current_path).to eq admin_dashboard_path
+        expect(page).to have_content("Unable to create tutorial")
+    end
 end

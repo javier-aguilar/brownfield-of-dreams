@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User' do
+describe 'User', :vcr do
   before :each do
     @user = create(:user)
     @user2 = create(:user)
