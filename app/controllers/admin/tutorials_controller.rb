@@ -6,8 +6,12 @@ class Admin::TutorialsController < Admin::BaseController
   def create
     videos = YouTube::Video.by_playlist(playlist_params[:playlist_id])
     tutorial_info = YouTube::Playlist.info(playlist_params[:playlist_id])
-    tutorial = Tutorial.create(tutorial_info_params(tutorial_info))
-    add_videos_to_tutorial(tutorial, videos)
+    if tutorial_info && videos
+      tutorial = Tutorial.create(tutorial_info_params(tutorial_info))
+      add_videos_to_tutorial(tutorial, videos)
+    else
+      flash[:error] = 'Unable to create tutorial.'
+    end
     redirect_to admin_dashboard_path
   end
 
@@ -59,8 +63,6 @@ class Admin::TutorialsController < Admin::BaseController
       if video.save
         link = view_context.link_to('View it here', tutorial_path(tutorial))
         flash[:success] = "Successfully created tutorial. #{link}."
-      else
-        flash[:error] = 'Unable to create tutorial.'
       end
     end
   end

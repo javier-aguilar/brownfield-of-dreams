@@ -10,7 +10,10 @@ module YouTube
     end
 
     def self.info(id)
-      new(YoutubeService.new.playlist_info(id))
+      playlist_data = YoutubeService.new.playlist_info(id)
+      return if playlist_data[:items].empty?
+
+      new(playlist_data)
     end
   end
 end
