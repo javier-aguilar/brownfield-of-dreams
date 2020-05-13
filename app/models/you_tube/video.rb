@@ -17,7 +17,7 @@ module YouTube
       playlist_data = YoutubeService.new.playlist_videos(id)
       return if playlist_data.nil?
 
-      playlist_data.map do |video|
+      playlist_data[:items].map do |video|
         new(YoutubeService.new.video_info(video[:contentDetails][:videoId]))
       end
     end
