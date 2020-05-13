@@ -1,5 +1,6 @@
 class UserActivationMailer < ApplicationMailer
-  default :from => "us@somedomain.com"
+  default :from => "no-reply@somedomain.com"
+  layout 'mailer'
 
    def registration_confirmation(user)
       mail(:to => "#{user.name} <#{user.email}>", :subject => "Registration Confirmation")
