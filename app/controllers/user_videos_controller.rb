@@ -22,7 +22,7 @@ class UserVideosController < ApplicationController
   end
 
   def redirect_to_login
-    flash[:error] = "Please login to save bookmark"
+    flash[:error] = 'Please login to save bookmark'
     redirect_to login_path
   end
 end
