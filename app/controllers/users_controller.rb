@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       session[:user_id] = @user.id
-      UserActivationMailer.registration_confirmation(@user).deliver
+      UserActivationMailer.registration_confirmation(@user).deliver_now
       flash[:success] = "This account has not yet been activated. Please check your email."
       redirect_to dashboard_path
     else
@@ -41,11 +41,5 @@ class UsersController < ApplicationController
                                  :password,
                                  :status,
                                  :confirm_token )
-  end
-
-  def confirmation_token
-    if self.confirm_token.blank?
-        self.confirm_token = SecureRandom.urlsafe_base64.to_s
-    end
   end
 end
