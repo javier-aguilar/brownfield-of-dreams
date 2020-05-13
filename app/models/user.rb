@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_create :confirm_token
+  before_create :confirmation_token
   has_many :user_videos, dependent: :destroy
   has_many :videos, through: :user_videos
 
@@ -13,5 +13,13 @@ class User < ApplicationRecord
     self.status = 'active'
     self.confirm_token = nil
     save!(:validate => false)
+  end
+
+  private
+
+  def confirmation_token
+    if self.confirm_token.nil?
+        self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
   end
 end
