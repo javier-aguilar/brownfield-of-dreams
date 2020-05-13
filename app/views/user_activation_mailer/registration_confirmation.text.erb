@@ -1,0 +1,9 @@
+Hi <%= @user.first_name %>,
+
+Thanks for registering! To activate your account click the link below.
+
+<%= confirm_email_url(@user.confirm_token) %>
+
+Thank You
+
+Team Brownfield
