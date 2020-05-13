@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   end
 
   get '/auth/github/callback', to: 'githubs#create'
+  post '/friends', to: 'friends#create'
+
 
   resources :users, only: [:new, :create, :update, :edit]
 
