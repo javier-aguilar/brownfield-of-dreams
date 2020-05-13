@@ -16,7 +16,6 @@ describe 'A registered user' do
 
     expect(page).to have_content("Bookmark added to your dashboard")
   end
-
   it "can't add the same bookmark more than once" do
     tutorial= create(:tutorial)
     video = create(:video, tutorial_id: tutorial.id)
@@ -30,5 +29,15 @@ describe 'A registered user' do
     expect(page).to have_content("Bookmark added to your dashboard")
     click_on 'Bookmark'
     expect(page).to have_content("Already in your bookmarks")
+  end
+  it "can't add the bookmark if not logged in" do
+    tutorial= create(:tutorial)
+    video = create(:video, tutorial_id: tutorial.id)
+
+    visit tutorial_path(tutorial)
+
+    click_on 'Bookmark'
+    expect(current_path).to eq login_path
+    expect(page).to have_content("Please login to save bookmark")
   end
 end
