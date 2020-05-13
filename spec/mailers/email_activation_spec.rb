@@ -28,12 +28,14 @@ describe 'As a visitor' do
 
   click_on'Create Account'
 
+  expect(@user.status).to eql('inactive')
   expect(current_path).to eq(dashboard_path)
 
-  expect(page).to have_content("Logged in as #{first_name}")
+  expect(page).to have_content("Logged in as #{@user.first_name}")
   expect(page).to have_content("This account has not yet been activated. Please check your email.")
 
-  visit ''
+# Add Magic Email stuff
 
+  expect(@user.status).to eql('active')
   expect(page).to have_content("Thank you! Your account is now activated.")
 end
