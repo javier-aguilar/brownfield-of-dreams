@@ -1,6 +1,11 @@
 <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
 
+  <% if current_user.status == 'active' %>
+    <p>Status: <%= current_user.status.upcase %> </p>
+  <% end %>
+
+
   <% unless current_user.token %>
     <%= link_to "Connnect to Github", "/auth/github" %>
   <% end %>
