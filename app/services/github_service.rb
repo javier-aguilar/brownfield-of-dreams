@@ -24,6 +24,7 @@ class GithubService
 
   def conn
     Faraday.new('https://api.github.com') do |conn|
+      conn.adapter Faraday.default_adapter
       conn.authorization :Bearer, @token
     end
   end
