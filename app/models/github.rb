@@ -6,11 +6,15 @@ module Github
 
   def self.followers(token)
     data = GithubService.new(token).list_followers
-    data.map { |user| Follower.new(user[:login], user[:html_url]) }
+    data.map do |user|
+      Github::User.new(user[:id], user[:login], user[:html_url])
+    end
   end
 
   def self.following(token)
     data = GithubService.new(token).list_following
-    data.map { |user| Follower.new(user[:login], user[:html_url]) }
+    data.map do |user|
+      Github::User.new(user[:id], user[:login], user[:html_url])
+    end
   end
 end
