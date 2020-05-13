@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_create :confirmation_token
   has_many :user_videos, dependent: :destroy
   has_many :videos, through: :user_videos
 
