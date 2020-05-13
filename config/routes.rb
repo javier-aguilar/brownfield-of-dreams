@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   namespace :user do
     get '/dashboard', to: 'dashboard#show'
+    get :confirm_email
   end
 
   get '/auth/github/callback', to: 'githubs#create'
