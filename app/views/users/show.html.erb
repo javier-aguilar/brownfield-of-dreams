@@ -8,36 +8,70 @@
   <%= button_to 'Log Out', logout_path, method: 'delete', class: "btn btn-primary mb1 bg-teal" %>
   <h3>Account Details</h3>
   <ul>
-    <li> <%= current_user.first_name  %> <%= current_user.last_name %> </li>
-    <li> <%= current_user.email%> </li>
+    <li>
+      <%= current_user.first_name  %> <%= current_user.last_name %>
+    </li>
+    <li>
+      <%= current_user.email%>
+    </li>
   </ul>
   <section>
     <h1>Bookmarked Segments</h1>
   </section>
+  <section>
+  <% unless @current_user.friendships.empty? %>
+    <h1>Friends</h1>
+      <ul>
+
+        <% for friendship in @current_user.friendships %>
+        <li>
+          <%= friendship.friend.first_name %> <%= friendship.friend.last_name %>
+        </li>
+        <% end %>
+
+      </ul>
+    </section>
+  <% end %>
   <% if current_user.token %>
     <section>
         <h1 class="github-header">Github</h1>
+
         <ul>
           <% @user.repos.each do |repo| %>
             <li><%= link_to repo.name, repo.url %></li>
           <% end %>
         </ul>
+
     </section>
-    <section>
-        <h1>Followers</h1>
-        <ul>
-          <% @user.followers.each do |follower| %>
-            <li><%= link_to follower.name, follower.url %></li>
-          <% end %>
-        </ul>
+    <section class="followers">
+      <h1>Followers</h1>
+      <ul>
+
+        <% @user.followers.each do |user| %>
+          <li id="<%= user.name%>">
+            <%= link_to user.name, user.url %>
+            <% if user.friendable?(@current_user.id) %>
+              <%= button_to "Add Friend", friends_path(id: user.id), method: :post %>
+            <% end %>
+          </li>
+        <% end %>
+
+      </ul>
     </section>
-    <section>
-        <h1>Following</h1>
-        <ul>
-          <% @user.following.each do |following| %>
-            <li><%= link_to following.name, following.url %></li>
-          <% end %>
-        </ul>
+    <section class="following">
+      <h1>Following</h1>
+      <ul>
+
+        <% @user.following.each do |user| %>
+          <li id="<%= user.name%>">
+            <%= link_to user.name, user.url %>
+            <% if user.friendable?(@current_user.id) %>
+              <%= button_to "Add Friend", friends_path(id: user.id), method: :post %>
+            <% end %>
+          </li>
+        <% end %>
+
+      </ul>
     </section>
   <% end %>
 </section>
