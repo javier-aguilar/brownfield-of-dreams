@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
   validates :password, presence: true, on: create
   validates :first_name, presence: true
+  validates :uid, uniqueness: true, allow_nil: true
   enum role: { default: 0, admin: 1 }
   has_secure_password
 
