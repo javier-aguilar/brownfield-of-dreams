@@ -22,4 +22,15 @@ describe "An Admin can edit a tutorial" do
       expect(page).to have_content("How to tie your shoes.")
     end
   end
+  scenario "by changing a video's position", :js, type: :request do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+    tutorial = create(:tutorial)
+    vid1 = create(:video, tutorial_id: tutorial.id)
+    expect(vid1.position).to eq 0
+
+    patch admin_video_path(vid1), params: {position: 4}
+
+    vid1.reload
+    expect(vid1.position).to eq 4
+  end
 end

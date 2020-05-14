@@ -1,22 +1,23 @@
 class Admin::VideosController < Admin::BaseController
   def edit
-    @video = Video.find(params[:video_id])
+    @video = Video.find(params[:id])
   end
 
   def update
     video = Video.find(params[:id])
-    video.update(video_params)
+    if video_params[:position]
+      video.update(video_params)
+    else
+      video.update(new_video_params)
+      redirect_to root_path
+    end
   end
 
   def create
     tutorial = Tutorial.find(params[:tutorial_id])
     thumbnail = YouTube::Video.by_id(new_video_params[:video_id]).thumbnail
     video = tutorial.videos.new(new_video_params.merge(thumbnail: thumbnail))
-    if video.save
-      flash[:success] = 'Successfully created video.'
-    else
-      flash[:error] = 'Unable to create video.'
-    end
+    flash[:success] = 'Successfully created video.' if video.save
     redirect_to edit_admin_tutorial_path(id: tutorial.id)
   end
 
