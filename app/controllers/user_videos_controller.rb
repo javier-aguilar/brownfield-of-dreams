@@ -1,4 +1,7 @@
 class UserVideosController < ApplicationController
+
+  before_action :require_current_user
+
   def new; end
 
   def create
@@ -8,7 +11,6 @@ class UserVideosController < ApplicationController
     elsif user_video.save
       flash[:success] = 'Bookmark added to your dashboard!'
     end
-
     redirect_back(fallback_location: root_path)
   end
 

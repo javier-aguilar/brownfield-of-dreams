@@ -12,24 +12,21 @@ class YoutubeService
   def playlist_videos(id)
     params = { part: 'snippet,contentDetails', playlistId: id, maxResults: 40 }
     data = get_json('youtube/v3/playlistItems', params)
-    items = data[:items]
     return unless data[:nextPageToken]
 
-    params = params.merge(pageToken: data[:nextPageToken])
-    more_item_results(params, items)
+    next_playlist_items(params, data)
   end
 
   private
 
-  def more_item_results(params, items)
-    next_page_results = get_json('youtube/v3/playlistItems', params)
-    items += next_page_results[:items]
-    while next_page_results[:nextPageToken]
-      params[:pageToken] = next_page_results[:nextPageToken]
-      next_page_results = get_json('youtube/v3/playlistItems', params)
-      items += next_page_results[:items]
+  def next_playlist_items(params, data)
+    while data[:nextPageToken]
+      params[:pageToken] = data[:nextPageToken]
+      results = get_json('youtube/v3/playlistItems', params)
+      data[:items] += results[:items]
+      data[:nextPageToken] = results[:nextPageToken]
     end
-    items
+    data
   end
 
   def get_json(url, params)
