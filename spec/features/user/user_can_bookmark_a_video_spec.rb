@@ -36,8 +36,10 @@ describe 'A registered user' do
 
     visit tutorial_path(tutorial)
 
-    click_on 'Bookmark'
-    expect(current_path).to eq login_path
-    expect(page).to have_content("Please login to save bookmark")
+    expect(page).to have_button('Bookmark', disabled: true)
+
+    within('.bookmarks-btn') do
+      expect(find('.btn')['title']).to  eq 'User must login to bookmark videos.'
+    end
   end
 end
