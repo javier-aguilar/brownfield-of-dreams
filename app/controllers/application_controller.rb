@@ -17,5 +17,4 @@ class ApplicationController < ActionController::Base
   def require_current_user
     four_oh_four unless current_user
   end
-
 end

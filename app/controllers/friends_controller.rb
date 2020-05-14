@@ -1,5 +1,4 @@
 class FriendsController < ApplicationController
-
   def create
     friend = User.find_by(uid: friends_param[:id])
     if friend
